@@ -2,14 +2,28 @@ puts "Welcome to the Authenticator"
 25.times { print "-" }
 puts "This program will take input from the user and compare password"
 
-users = []
+users = [
+  {username: "Peter", password: "321"}
+]
 
-users_template = {username: "", password: ""}
 
+tries = 1
+while tries < 4
+  print "Username: "
+  username = gets.chomp
+  print "Password: "
+  password = gets.chomp
 
-print "Username: "
-user = gets.chomp
-print "Password: "
-pass = gets.chomp
+  users.each do |user| 
+    if user[:username] == username && user[:password] == password 
+      puts users 
+      break 
+    else 
+      puts "Invalid username/password combination" 
+      tries += 1
+    end
+  end
+
+end
 
 
