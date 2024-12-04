@@ -3,7 +3,7 @@ puts "Welcome to the Authenticator"
 puts "\nThis program will take input from the user and compare password"
 
 users = [
-  {username: "Peter", password: "321"}
+  {username: "peter", password: "321"}
 ]
 
 tries = 1
@@ -11,12 +11,20 @@ access = true
 menu = true
 
 
-
+def auth_user(username, password, users)
+  users.each do |user_element| 
+    if user_element[:username] == username && user_element[:password] == password 
+      return user_element
+    end
+  end
+  puts "Incorrect credentials"
+end
 
 
 while menu
   access = true
   # Menu Screen
+  puts "Please select the following by entering the number:"
   puts "1) Login"
   puts "2) Sign Up"
   puts "3) Quit"
@@ -25,29 +33,24 @@ while menu
 
   # Login selected
   if user_response == "1"
-    while tries < 4 && access
+    while tries < 4
       print "Username: "
-      username = gets.chomp
+      username = gets.chomp.downcase
       print "Password: "
-      password = gets.chomp
+      password = gets.chomp.downcase
 
-      users.each do |user| 
-        if user[:username] == username && user[:password] == password 
-          puts users 
-          access = false
-        else 
-          puts "Invalid username/password combination" 
-          tries += 1
-        end
-      end
+      authentication_result = auth_user(username, password, users)
+      puts authentication_result
+      tries += 1
     end
+
   
   # Sign up selected
   elsif user_response == "2"
     print "Enter username: "
-    new_username = gets.chomp
+    new_username = gets.chomp.downcase
     print "Enter password: "
-    new_password = gets.chomp
+    new_password = gets.chomp.downcase
     users.push({username: new_username, password: new_password})
     puts "New user created! #{users}"
     tries = 1
@@ -60,7 +63,7 @@ while menu
     menu = false
   end
 end
-puts "Not Authenticated, goodbye!"
+
 
 
 
