@@ -10,7 +10,7 @@ tries = 1
 access = true
 menu = true
 
-# User authentication logic 
+# User authentication logic function
 def auth_user(username, password, users)
   users.each do |user_element| 
     if user_element[:username] == username && user_element[:password] == password 
